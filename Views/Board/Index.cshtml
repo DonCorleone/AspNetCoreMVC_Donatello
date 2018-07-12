@@ -1,0 +1,26 @@
+@model Donatello.ViewModels.BoardView
+@{
+    ViewData["Title"] = "Board View";
+}
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+	</head>
+	<body>
+        <div class="container">
+            <div class="row">
+                @foreach (var column in Model.Columns)
+                {
+                    <div class="col m2">
+                        <h3>@column.Title</h3>
+                    </div>
+                }
+            </div>
+        </div>
+    </body> 
+</html>
