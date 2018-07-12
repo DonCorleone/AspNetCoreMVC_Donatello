@@ -13,7 +13,10 @@
 
 ### View
 
-    dotnet aspnet-codegenerator --project ../../. view Index Empty
+    cd views
+    cd xxx
+
+    dotnet aspnet-codegenerator --project ../../. view Index Empty --relativeFolderPath ./Views/xxx/
 
 ### ViewModel
 
