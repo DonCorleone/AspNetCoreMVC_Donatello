@@ -8,6 +8,13 @@ namespace Donatello.ViewModels
       public class Column
       { 
          public string Title { get; set; }
+
+         public List<Card> Cards {get;set;} = new List<Card>();
+      }
+
+      public class Card{
+
+         public string Content {get;set;}
       }
    }
 }
