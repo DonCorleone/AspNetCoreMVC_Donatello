@@ -1,20 +1,22 @@
+using Donatello.Services;
 using Donatello.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Donatello.Controllers
 {
-   public class HomeController : Controller
-    {
-        public IActionResult Index()
-        {
-            var model = new BoardList();
-            
-            var board = new BoardList.Board();
-            board.Title = "Linis Board";
-            
-            model.Boards.Add(board);
-            model.Boards.Add(new BoardList.Board(){Title = "Yess"});
-            return View(model);
-        }
-    }
+	public class HomeController : Controller
+	{
+      private readonly BoardService boardService;
+
+      public HomeController(BoardService boardService)
+		{
+         this.boardService = boardService;
+      }
+
+		public IActionResult Index()
+		{
+			BoardList model = boardService.GetListBoards();
+			return View(model);
+		}
+	}
 }
