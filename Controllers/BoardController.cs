@@ -10,14 +10,22 @@ namespace Donatello.Controllers
     public class BoardController : Controller
     {
         public IActionResult Index()
-        {
-            var model = new BoardView();
-            var columnOne = new BoardView.Column(){
-                Title = "ToDo"
-            };
+      {
+         BoardView model = GetBoardView();
 
-            columnOne.Cards.AddRange(
-                new BoardView.Card[]{
+         return View(model);
+      }
+
+      private static BoardView GetBoardView()
+      {
+         var boardView = new BoardView();
+         var columnOne = new BoardView.Column()
+         {
+            Title = "ToDo"
+         };
+
+         columnOne.Cards.AddRange(
+             new BoardView.Card[]{
                     new BoardView.Card(){
                         Content = "CardOne"
                     },new BoardView.Card(){
@@ -25,29 +33,29 @@ namespace Donatello.Controllers
                     }, new BoardView.Card(){
                         Content = "CardTree"
                     }
+             }
+         );
+
+         var columnTwo = new BoardView.Column()
+         {
+            Title = "Drah"
+         };
+
+         columnTwo.Cards.AddRange(
+             new BoardView.Card[]{
+                new BoardView.Card(){
+                    Content = "CardUno"
+                },new BoardView.Card(){
+                    Content = "CardDue"
+                    }, new BoardView.Card(){
+                    Content = "CardTre"
                 }
-            );
+             }
+         );
 
-            var columnTwo = new BoardView.Column(){
-                Title = "Drah"
-            };
-
-            columnTwo.Cards.AddRange(
-                new BoardView.Card[]{
-                    new BoardView.Card(){
-                        Content = "CardUno"
-                    },new BoardView.Card(){
-                        Content = "CardDue"
-                        }, new BoardView.Card(){
-                        Content = "CardTre"
-                    }
-                }
-            );
-          
-            model.Columns.AddRange(
-                new BoardView.Column[]{columnOne, columnTwo});
-
-            return View(model);            
-        }
-    }
+         boardView.Columns.AddRange(
+             new BoardView.Column[] { columnOne, columnTwo });
+         return boardView;
+      }
+   }
 }

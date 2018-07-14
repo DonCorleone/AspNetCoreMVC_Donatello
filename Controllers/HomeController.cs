@@ -7,14 +7,14 @@ namespace Donatello.Controllers
     {
         public IActionResult Index()
         {
-            var modelz = new BoardList();
+            var model = new BoardList();
             
             var board = new BoardList.Board();
             board.Title = "Linis Board";
             
-            modelz.Boards.Add(board);
-            modelz.Boards.Add(new BoardList.Board(){Title = "Yess"});
-            return View(modelz);
+            model.Boards.Add(board);
+            model.Boards.Add(new BoardList.Board(){Title = "Yess"});
+            return View(model);
         }
     }
 }
