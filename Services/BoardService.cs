@@ -1,18 +1,24 @@
+using Donatello.Infrastructure;
 using Donatello.ViewModels;
 
 namespace Donatello.Services{
    public class BoardService{
+      private readonly DonatelloContext dbContext;
+
+      public BoardService(DonatelloContext dbContext)
+       {
+         this.dbContext = dbContext;
+      }
       public BoardList GetListBoards()
       {
          var boardList = new BoardList();
 
-         boardList.Boards.Add(new BoardList.Board() {
-            Title = "Linis Board"
-         });
-
-         boardList.Boards.Add(new BoardList.Board() { 
-            Title = "Yess" 
-         });
+         foreach (var dbBoard in dbContext.Boards)
+         {
+            boardList.Boards.Add(new BoardList.Board() {
+                Title = dbBoard.Title
+            });
+         }
 
          return boardList;
       }
