@@ -13,10 +13,22 @@ namespace Donatello.Controllers
          this.boardService = boardService;
       }
 
+		[HttpGet]
 		public IActionResult Index()
 		{
 			BoardList model = boardService.GetListBoards();
 			return View(model);
+		}
+
+		[HttpGet]
+		public IActionResult Create(){
+			return View();
+		}
+		
+		[HttpPost]
+		public IActionResult Create(NewBoard viewModel){
+			boardService.AddBoard(viewModel.Title);
+			return RedirectToAction(nameof(Index));
 		}
 	}
 }

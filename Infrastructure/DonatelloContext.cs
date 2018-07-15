@@ -1,3 +1,4 @@
+using Donatello.Models;
 using Microsoft.EntityFrameworkCore;
 using static Donatello.ViewModels.BoardList;
 
