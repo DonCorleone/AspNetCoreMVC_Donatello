@@ -27,3 +27,23 @@
 ### Materialize
 
 [https://materializecss.com/](https://materializecss.com/)
+
+## EF Core
+
+### Add EF Core
+
+    dotnet add package Pomelo.EntityFrameworkCore.MySql --version 2.1.1
+    dotnet add package Microsoft.EntityFrameworkCore.Tools --version 2.1.1
+
+### Dotnet EF CLI
+
+#### Docs
+[https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet)
+
+#### Add-Migration
+
+    dotnet ef migrations add InitialCreate
+
+#### Update-Database
+
+    dotnet ef database update
