@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using Donatello.Infrastructure;
 using Donatello.Models;
 using Donatello.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Donatello.Services
 {
@@ -27,54 +29,34 @@ namespace Donatello.Services
 
 			return boardList;
 		}
-		public BoardView GetBoardView()
+		public BoardView GetBoardView(int id)
 		{
-			var boardView = new BoardView();
-			var columnOne = new BoardView.Column()
+			var modelBoard = new BoardView();
+
+			var dbBoard = dbContext.Boards
+				.Include(b => b.Columns)
+				.ThenInclude(c => c.Cards)
+				.SingleOrDefault(x => x.Id == id);
+
+			foreach (var dbColumn in dbBoard.Columns)
 			{
-				Title = "ToDo"
-			};
-
-			columnOne.Cards.AddRange(
-				new BoardView.Card[]
+				var modelColumn = new BoardView.Column()
 				{
-					new BoardView.Card()
-					{
-						Content = "CardOne"
-					}, new BoardView.Card()
-					{
-						Content = "CardTwo"
-					}, new BoardView.Card()
-					{
-						Content = "CardTree"
-					}
-				}
-			);
+					Title = dbColumn.Title
+				};
 
-			var columnTwo = new BoardView.Column()
-			{
-				Title = "Drah"
-			};
-
-			columnTwo.Cards.AddRange(
-				new BoardView.Card[]
+				foreach (var dbCard in dbColumn.Cards)
 				{
-					new BoardView.Card()
-					{
-						Content = "CardUno"
-					}, new BoardView.Card()
-					{
-						Content = "CardDue"
-					}, new BoardView.Card()
-					{
-						Content = "CardTre"
-					}
-				}
-			);
+					 var modelCard = new BoardView.Card(){
+						 Content = dbCard.Contents
+					 };
 
-			boardView.Columns.AddRange(
-				new BoardView.Column[] { columnOne, columnTwo });
-			return boardView;
+					 modelColumn.Cards.Add(modelCard);
+				}
+				
+				modelBoard.Columns.Add(modelColumn);
+			}
+			return modelBoard;
 		}
 
 		public void AddBoard(string title)

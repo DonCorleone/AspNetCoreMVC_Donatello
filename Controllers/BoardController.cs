@@ -16,9 +16,9 @@ namespace Donatello.Controllers
 		{
          this.boardService = boardService;
       }
-		public IActionResult Index()
+		public IActionResult Index(int id)
 		{
-			BoardView model = boardService.GetBoardView();
+			BoardView model = boardService.GetBoardView(id);
 
 			return View(model);
 		}

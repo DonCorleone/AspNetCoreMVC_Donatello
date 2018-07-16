@@ -22,6 +22,12 @@
 
     VSCode > NewFile "ViewModel.cs"
 
+## Razor
+
+### Intellisense for Tag-Helper
+
+    dotnet add package Microsoft.AspNetCore.Razor.Tools --version 1.1.0-preview4-final
+
 ## Style
 
 ### Materialize
@@ -38,6 +44,7 @@
 ### Dotnet EF CLI
 
 #### Docs
+
 [https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet)
 
 #### Add-Migration

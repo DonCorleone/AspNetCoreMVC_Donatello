@@ -3,14 +3,16 @@ using System;
 using Donatello.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace donatello.Migrations
 {
     [DbContext(typeof(DonatelloContext))]
-    partial class DonatelloContextModelSnapshot : ModelSnapshot
+    [Migration("20180716193947_Adding Columns and Cards")]
+    partial class AddingColumnsandCards
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
