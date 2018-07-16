@@ -7,6 +7,7 @@ using Donatello.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,7 +20,10 @@ namespace donatello
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<BoardService>();
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
 
             var connection = "Server=127.0.0.1;Database=Donatello;User=root;Password=root;";
             services.AddDbContext<DonatelloContext>(o => 

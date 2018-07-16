@@ -6,6 +6,9 @@
 <div class="container">
 	<div class="row">
 		<h2>Boards</h2>
+		<a asp-action="Create" asp-controller="Home" class="waves-effect waves-light btn">
+			New Board
+		</a>
 	</div>
 	<div class="row">
 		@foreach (var board in Model.Boards)
