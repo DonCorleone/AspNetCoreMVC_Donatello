@@ -40,6 +40,8 @@ namespace donatello
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+
             app.UseMvcWithDefaultRoute();
         }
     }

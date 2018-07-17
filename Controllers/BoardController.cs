@@ -31,8 +31,16 @@ namespace Donatello.Controllers
 		[HttpPost]
 		public IActionResult AddCard(AddCard addCardViewModel){
 
+			if (!ModelState.IsValid)
+				return View(addCardViewModel);
+
 			boardService.AddCard(addCardViewModel);
-			return RedirectToAction(nameof(Index), new AddCard{Id = addCardViewModel.Id});
+			
+			return RedirectToAction(
+				nameof(Index), new AddCard{
+					Id = addCardViewModel.Id
+				}
+			);
 		}
 	}
 }
