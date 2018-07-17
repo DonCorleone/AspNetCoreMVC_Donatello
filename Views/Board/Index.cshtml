@@ -1,10 +1,13 @@
-@model Donatello.ViewModels.BoardView
+@model BoardView
 @{
     ViewData["Title"] = "Board View";
 }
 
 <div class="container">
-    <div class="row">
+	<div class="row">
+		<h2>@Model.Title</h2>
+	</div>
+	<div class="row">
         @foreach (var column in Model.Columns)
         {
             <div class="col m2">

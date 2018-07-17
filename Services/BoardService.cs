@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Donatello.Infrastructure;
 using Donatello.Models;
@@ -23,7 +24,8 @@ namespace Donatello.Services
 			{
 				boardList.Boards.Add(new Board()
 				{
-					Title = dbBoard.Title
+					Id = dbBoard.Id,
+						Title = dbBoard.Title
 				});
 			}
 
@@ -38,6 +40,8 @@ namespace Donatello.Services
 				.ThenInclude(c => c.Cards)
 				.SingleOrDefault(x => x.Id == id);
 
+			modelBoard.Title = dbBoard.Title;
+
 			foreach (var dbColumn in dbBoard.Columns)
 			{
 				var modelColumn = new BoardView.Column()
@@ -47,13 +51,14 @@ namespace Donatello.Services
 
 				foreach (var dbCard in dbColumn.Cards)
 				{
-					 var modelCard = new BoardView.Card(){
-						 Content = dbCard.Contents
-					 };
+					var modelCard = new BoardView.Card()
+					{
+						Content = dbCard.Contents
+					};
 
-					 modelColumn.Cards.Add(modelCard);
+					modelColumn.Cards.Add(modelCard);
 				}
-				
+
 				modelBoard.Columns.Add(modelColumn);
 			}
 			return modelBoard;
@@ -61,9 +66,46 @@ namespace Donatello.Services
 
 		public void AddBoard(string title)
 		{
+
 			dbContext.Boards.Add(new Models.Board()
 			{
-				Title = title
+				Title = title,
+				Columns = new List<Column>(new Column[]
+				{
+					new Column()
+					{
+						Title = "Column 1",
+							Cards = new List<Card>(new Card[]
+							{
+								new Card()
+								{
+									Contents = "Card A"
+								}
+							})
+					},
+					new Column()
+					{
+						Title = "Column 2",
+							Cards = new List<Card>(new Card[]
+							{
+								new Card()
+								{
+									Contents = "Card B"
+								}
+							})
+					},
+					new Column()
+					{
+						Title = "Column 3",
+							Cards = new List<Card>(new Card[]
+							{
+								new Card()
+								{
+									Contents = "Card C"
+								}
+							})
+					}
+				})
 			});
 
 			dbContext.SaveChanges();
