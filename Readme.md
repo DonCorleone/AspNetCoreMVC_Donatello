@@ -54,3 +54,9 @@
 #### Update-Database
 
     dotnet ef database update
+
+## Scripts
+
+### Docker (Maria DB)
+
+    Docker Start 5a0511713f76

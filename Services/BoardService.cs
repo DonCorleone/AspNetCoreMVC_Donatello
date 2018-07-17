@@ -41,6 +41,7 @@ namespace Donatello.Services
 				.SingleOrDefault(x => x.Id == id);
 
 			modelBoard.Title = dbBoard.Title;
+			modelBoard.Id = dbBoard.Id;
 
 			foreach (var dbColumn in dbBoard.Columns)
 			{
@@ -64,7 +65,25 @@ namespace Donatello.Services
 			return modelBoard;
 		}
 
-		public void AddBoard(string title)
+      internal void AddCard(AddCard addCardViewModel)
+      {
+         var board = dbContext.Boards
+				.Include (b => b.Columns)
+				.SingleOrDefault(x => x.Id == addCardViewModel.Id);
+
+			if (!board.Columns.Any())
+				board.Columns.Add(new Column(){
+					Title = "ToDo"}
+				);
+
+			board.Columns[0].Cards.Add(new Card(){
+				Contents = addCardViewModel.Contents
+			});
+
+			dbContext.SaveChanges();
+      }
+
+      public void AddBoard(string title)
 		{
 
 			dbContext.Boards.Add(new Models.Board()

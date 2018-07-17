@@ -7,6 +7,12 @@
 	<div class="row">
 		<h2>@Model.Title</h2>
 	</div>
+    @if (Model.Columns.Count > 0)
+    {
+        <a asp-action="AddCard" asp-controller="Board" asp-route-id="@Model.Id" class="waves-effect waves-light btn">
+        Add Card
+        </a>
+    }
 	<div class="row">
         @foreach (var column in Model.Columns)
         {

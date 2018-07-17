@@ -26,8 +26,8 @@ namespace Donatello.Controllers
 		}
 		
 		[HttpPost]
-		public IActionResult Create(NewBoard viewModel){
-			boardService.AddBoard(viewModel.Title);
+		public IActionResult Create(NewBoard newBoardViewModel){
+			boardService.AddBoard(newBoardViewModel.Title);
 			return RedirectToAction(nameof(Index));
 		}
 	}

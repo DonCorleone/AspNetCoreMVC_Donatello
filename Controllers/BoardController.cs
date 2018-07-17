@@ -10,17 +10,29 @@ namespace Donatello.Controllers
 {
 	public class BoardController : Controller
 	{
-      private readonly BoardService boardService;
+		private readonly BoardService boardService;
 
-      public BoardController(BoardService boardService)
+		public BoardController(BoardService boardService)
 		{
-         this.boardService = boardService;
-      }
+			this.boardService = boardService;
+		}
 		public IActionResult Index(int id)
 		{
 			BoardView model = boardService.GetBoardView(id);
 
 			return View(model);
+		}
+
+		public IActionResult AddCard(int id)
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult AddCard(AddCard addCardViewModel){
+
+			boardService.AddCard(addCardViewModel);
+			return RedirectToAction(nameof(Index), new AddCard{Id = addCardViewModel.Id});
 		}
 	}
 }

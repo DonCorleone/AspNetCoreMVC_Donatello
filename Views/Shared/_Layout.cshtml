@@ -8,6 +8,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
 </head>
 <body> 
+    <!-- add this -->
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">
+                Donatello
+            </a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li>
+                    <a asp-controller="Home" asp-action="Index">
+                        Boards
+                    </a>     
+                </li>
+            </ul>
+        </div>
+    </nav>  
     <div>
         @RenderBody()
     </div>
