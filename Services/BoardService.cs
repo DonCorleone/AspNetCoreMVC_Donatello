@@ -54,6 +54,7 @@ namespace Donatello.Services
 				{
 					var modelCard = new BoardView.Card()
 					{
+						Id = dbCard.Id,
 						Content = dbCard.Contents
 					};
 

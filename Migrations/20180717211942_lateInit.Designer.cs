@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace donatello.Migrations
 {
     [DbContext(typeof(DonatelloContext))]
-    [Migration("20180716193947_Adding Columns and Cards")]
-    partial class AddingColumnsandCards
+    [Migration("20180717211942_lateInit")]
+    partial class lateInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,11 +40,13 @@ namespace donatello.Migrations
 
                     b.Property<string>("Contents");
 
+                    b.Property<string>("Notes");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ColumnId");
 
-                    b.ToTable("Card");
+                    b.ToTable("Cards");
                 });
 
             modelBuilder.Entity("Donatello.Models.Column", b =>

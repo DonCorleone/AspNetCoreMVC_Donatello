@@ -12,5 +12,7 @@ namespace Donatello.Infrastructure{
       }
 
       public DbSet<Board> Boards{get;set;}
+
+      public DbSet<Card> Cards { get; set; }
    }
 }

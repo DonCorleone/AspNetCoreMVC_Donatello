@@ -20,6 +20,8 @@ namespace donatello
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<BoardService>();
+            services.AddScoped<CardService>();
+            
             services.AddMvc(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());

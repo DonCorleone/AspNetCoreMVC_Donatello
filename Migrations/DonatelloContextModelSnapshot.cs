@@ -38,11 +38,13 @@ namespace donatello.Migrations
 
                     b.Property<string>("Contents");
 
+                    b.Property<string>("Notes");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ColumnId");
 
-                    b.ToTable("Card");
+                    b.ToTable("Cards");
                 });
 
             modelBuilder.Entity("Donatello.Models.Column", b =>

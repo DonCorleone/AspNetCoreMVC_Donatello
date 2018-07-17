@@ -3,10 +3,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace donatello.Migrations
 {
-    public partial class AddingColumnsandCards : Migration
+    public partial class lateInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Boards",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Boards", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Column",
                 columns: table => new
@@ -28,19 +41,20 @@ namespace donatello.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Card",
+                name: "Cards",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Contents = table.Column<string>(nullable: true),
+                    Notes = table.Column<string>(nullable: true),
                     ColumnId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Card", x => x.Id);
+                    table.PrimaryKey("PK_Cards", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Card_Column_ColumnId",
+                        name: "FK_Cards_Column_ColumnId",
                         column: x => x.ColumnId,
                         principalTable: "Column",
                         principalColumn: "Id",
@@ -48,8 +62,8 @@ namespace donatello.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Card_ColumnId",
-                table: "Card",
+                name: "IX_Cards_ColumnId",
+                table: "Cards",
                 column: "ColumnId");
 
             migrationBuilder.CreateIndex(
@@ -61,10 +75,13 @@ namespace donatello.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Card");
+                name: "Cards");
 
             migrationBuilder.DropTable(
                 name: "Column");
+
+            migrationBuilder.DropTable(
+                name: "Boards");
         }
     }
 }
