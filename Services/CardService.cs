@@ -34,7 +34,7 @@ namespace Donatello.Services
       {
          var dbCard = dbContext.Cards.FirstOrDefault(x => x.Id == cardDetails.Id);
          
-         dbCard.Notes = cardDetails.Contents;
+         dbCard.Notes = cardDetails.Notes;
          dbCard.Contents = cardDetails.Contents;
 
          dbContext.SaveChanges();
