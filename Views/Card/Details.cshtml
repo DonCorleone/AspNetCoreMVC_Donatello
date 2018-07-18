@@ -5,7 +5,7 @@
 <div class="container">
     <h2>Details</h2>
     <div class="row">
-        <form class="col s12" asp-controller="Card" asp-action="Details">
+        <form class="col s12" asp-controller="Card" asp-action="Update">
             <div class="row">
                 <div class="input-field col s12">
                     <input placeholder="Card contents"
@@ -21,8 +21,10 @@
                     <label asp-for="Notes">Notes</label>
                 </div>
             </div>
-             <div class="row">
+            <div class="row">
+                <input asp-for="Id" type="hidden" />
                 <input type="submit" value="Save" class="btn" />
+                @TempData["Message"]
             </div>
         </form>
     </div>

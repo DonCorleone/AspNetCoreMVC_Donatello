@@ -9,28 +9,30 @@ namespace Donatello.Controllers
 {
 	public class CardController : Controller
 	{
-      private readonly CardService cardService;
+      private readonly CardService _cardService;
 
       public CardController(CardService cardService)
 		{
-         this.cardService = cardService;
+         this._cardService = cardService;
       }
 
 		[HttpGet]
 		public IActionResult Details(int id)
 		{
 
-			CardDetails cardDetailsViewModel = cardService.GetDetails(id);
+			CardDetails cardDetailsViewModel = this._cardService.GetDetails(id);
 
-			return View(cardDetailsViewModel);
+			return base.View(cardDetailsViewModel);
 		}
 
 		[HttpPost]
-		public IActionResult Details(CardDetails cardDetails)
+		public IActionResult Update(CardDetails cardDetails)
 		{
-			cardService.Update(cardDetails);
+			this._cardService.Update(cardDetails);
 
-			return RedirectToAction(
+			base.TempData["Message"] = "Saved Card Details";
+
+			return base.RedirectToAction(
 				nameof(Details), 				
 				new {
 					Id = cardDetails.Id

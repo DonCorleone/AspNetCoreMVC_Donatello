@@ -1,38 +1,45 @@
  <!DOCTYPE html>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    <!-- Materialize (Layout) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        <!-- Materialize (Layout) -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">    <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
 
-    <!-- JQuery (AJAX) -->
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+        <!-- JQuery (AJAX) -->
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
 
-    <!-- Own CSS -->
-    <link href="/css/site.css" rel="stylesheet" />
-</head>
-<body> 
-    <!-- add this -->
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo center">
-                Donatello
-            </a>
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
-                <li>
-                    <a asp-controller="Home" asp-action="Index">
-                        Boards
-                    </a>     
-                </li>
-            </ul>
+        <!-- Own CSS -->
+        <link href="/css/site.css" rel="stylesheet" />
+    </head>
+    <body> 
+        <!-- add this -->
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">
+                    Donatello
+                </a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li>
+                        <a asp-controller="Home" asp-action="Index">
+                            Boards
+                        </a>     
+                    </li>
+                </ul>
+            </div>
+        </nav>  
+        <div>
+            @RenderBody()
         </div>
-    </nav>  
-    <div>
-        @RenderBody()
-    </div>
-</body>
+    </body>
 </html>
+
+@if(TempData.ContainsKey("Message"))
+{
+    <script type="text/javascript">
+        M.toast({ html: '@TempData["Message"]' }, 2000);
+</script>
+}
