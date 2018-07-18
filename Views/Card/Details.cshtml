@@ -22,6 +22,12 @@
                 </div>
             </div>
             <div class="row">
+                <div class="input-field col s12">
+                    <select asp-for="selectedColumnId" asp-items="Model.Columns"></select>
+                    <label asp-for="selectedColumnId">Column</label>
+                </div>
+            </div>
+            <div class="row">
                 <input asp-for="Id" type="hidden" />
                 <input type="submit" value="Save" class="btn" />
                 @TempData["Message"]
@@ -29,3 +35,12 @@
         </form>
     </div>
 </div>
+
+<!--Easily fixed if we add the relevant Materialize code at the bottom of our View.
+Try it now and we should have a dropdown list of columns... -->
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
+</script>

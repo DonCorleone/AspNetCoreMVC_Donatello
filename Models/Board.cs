@@ -14,6 +14,9 @@ namespace Donatello.Models
 		public int Id { get; set; }
 		public string Title { get; set; }
 		public List<Card> Cards { get; set; } = new List<Card>();
+
+		// Reverse Navigation Property
+		public int BoardId { get; set; }
 	}
 
 	public class Card
@@ -21,5 +24,9 @@ namespace Donatello.Models
 		public int Id { get; set; }
 		public string Contents { get; set; }
 		public string Notes { get; set; }
+
+		// Reverse Navigation Property
+    	public int ColumnId { get; set; }
+    	public Column Column { get; set; }
 	}
 }

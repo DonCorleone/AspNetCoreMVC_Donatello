@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Donatello.Infrastructure;
 using Donatello.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Donatello.Services
@@ -17,16 +18,27 @@ namespace Donatello.Services
 
       public CardDetails GetDetails(int id){
 
-         var dbCard = dbContext.Cards.SingleOrDefault(x => x.Id == id);
+         var dbCard = dbContext.Cards
+            .Include(c => c.Column)
+            .SingleOrDefault(x => x.Id == id);
 
          if (dbCard == null)
             return new CardDetails();
 
+         var dbBoard = dbContext.Boards
+            .Include(b => b.Columns)
+            .SingleOrDefault(x => x.Id == dbCard.Column.BoardId);
+
+         var availableColumns = dbBoard.Columns.Select(x => new SelectListItem(){
+            Value = x.Id.ToString(),
+            Text = x.Title});
          // else
          return new CardDetails(){
             Id = dbCard.Id,
             Contents = dbCard.Contents,
-            Notes = dbCard.Notes
+            Notes = dbCard.Notes,
+            selectedColumnId = dbCard.ColumnId,
+            Columns = availableColumns.ToList()
          };
       }
 
@@ -36,6 +48,7 @@ namespace Donatello.Services
          
          dbCard.Notes = cardDetails.Notes;
          dbCard.Contents = cardDetails.Contents;
+         dbCard.ColumnId = cardDetails.selectedColumnId;
 
          dbContext.SaveChanges();
       }
