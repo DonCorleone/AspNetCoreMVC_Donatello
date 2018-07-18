@@ -10,17 +10,17 @@ namespace Donatello.Services
 {
 	public class BoardService
 	{
-		private readonly DonatelloContext dbContext;
+		private readonly DonatelloContext _dbContext;
 
 		public BoardService(DonatelloContext dbContext)
 		{
-			this.dbContext = dbContext;
+			this._dbContext = dbContext;
 		}
 		public BoardList GetListBoards()
 		{
 			var boardList = new BoardList();
 
-			foreach (var dbBoard in dbContext.Boards)
+			foreach (var dbBoard in _dbContext.Boards)
 			{
 				boardList.Boards.Add(new Board()
 				{
@@ -35,7 +35,7 @@ namespace Donatello.Services
 		{
 			var modelBoard = new BoardView();
 
-			var dbBoard = dbContext.Boards
+			var dbBoard = _dbContext.Boards
 				.Include(b => b.Columns)
 				.ThenInclude(c => c.Cards)
 				.SingleOrDefault(x => x.Id == id);
@@ -68,7 +68,7 @@ namespace Donatello.Services
 
       internal void AddCard(AddCard addCardViewModel)
       {
-         var board = dbContext.Boards
+         var board = _dbContext.Boards
 				.Include (b => b.Columns)
 				.SingleOrDefault(x => x.Id == addCardViewModel.Id);
 
@@ -81,13 +81,13 @@ namespace Donatello.Services
 				Contents = addCardViewModel.Contents
 			});
 
-			dbContext.SaveChanges();
+			_dbContext.SaveChanges();
       }
 
       public void AddBoard(string title)
 		{
 
-			dbContext.Boards.Add(new Models.Board()
+			_dbContext.Boards.Add(new Models.Board()
 			{
 				Title = title,
 				Columns = new List<Column>(new Column[]
@@ -128,7 +128,7 @@ namespace Donatello.Services
 				})
 			});
 
-			dbContext.SaveChanges();
+			_dbContext.SaveChanges();
 		}
 	}
 }

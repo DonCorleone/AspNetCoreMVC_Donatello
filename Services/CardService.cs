@@ -9,23 +9,23 @@ namespace Donatello.Services
 {
    public class CardService
    {
-      private readonly DonatelloContext dbContext;
+      private readonly DonatelloContext _dbContext;
 
       public CardService(DonatelloContext dbContext)
       {
-         this.dbContext = dbContext;
+         this._dbContext = dbContext;
       }
 
       public CardDetails GetDetails(int id){
 
-         var dbCard = dbContext.Cards
+         var dbCard = _dbContext.Cards
             .Include(c => c.Column)
             .SingleOrDefault(x => x.Id == id);
 
          if (dbCard == null)
             return new CardDetails();
 
-         var dbBoard = dbContext.Boards
+         var dbBoard = _dbContext.Boards
             .Include(b => b.Columns)
             .SingleOrDefault(x => x.Id == dbCard.Column.BoardId);
 
@@ -44,13 +44,13 @@ namespace Donatello.Services
 
       internal void Update(CardDetails cardDetails)
       {
-         var dbCard = dbContext.Cards.FirstOrDefault(x => x.Id == cardDetails.Id);
+         var dbCard = _dbContext.Cards.FirstOrDefault(x => x.Id == cardDetails.Id);
          
          dbCard.Notes = cardDetails.Notes;
          dbCard.Contents = cardDetails.Contents;
          dbCard.ColumnId = cardDetails.selectedColumnId;
 
-         dbContext.SaveChanges();
+         _dbContext.SaveChanges();
       }
    }
 }

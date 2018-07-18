@@ -6,29 +6,31 @@ namespace Donatello.Controllers
 {
 	public class HomeController : Controller
 	{
-      private readonly BoardService boardService;
+      private readonly BoardService _boardService;
 
-      public HomeController(BoardService boardService)
-		{
-         this.boardService = boardService;
+      public HomeController(BoardService boardService){
+         this._boardService = boardService;
       }
 
 		[HttpGet]
-		public IActionResult Index()
-		{
-			BoardList model = boardService.GetListBoards();
-			return View(model);
+		public IActionResult Index(){
+
+			BoardList model = _boardService.GetListBoards();
+
+			return base.View(model);
 		}
 
 		[HttpGet]
 		public IActionResult Create(){
-			return View();
+			return base.View();
 		}
 		
 		[HttpPost]
 		public IActionResult Create(NewBoard newBoardViewModel){
-			boardService.AddBoard(newBoardViewModel.Title);
-			return RedirectToAction(nameof(Index));
+
+			_boardService.AddBoard(newBoardViewModel.Title);
+
+			return base.RedirectToAction(nameof(Index));
 		}
 	}
 }
