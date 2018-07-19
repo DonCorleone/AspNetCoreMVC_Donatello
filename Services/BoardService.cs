@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Donatello.Api.Controllers;
 using Donatello.Infrastructure;
 using Donatello.Models;
 using Donatello.ViewModels;
@@ -47,6 +48,7 @@ namespace Donatello.Services
 			{
 				var modelColumn = new BoardView.Column()
 				{
+					Id = dbColumn.Id,
 					Title = dbColumn.Title
 				};
 
@@ -128,6 +130,13 @@ namespace Donatello.Services
 				})
 			});
 
+			_dbContext.SaveChanges();
+		}
+
+		public void Move(MoveCardCommand command){
+						
+			var dbCard = _dbContext.Cards.FirstOrDefault(x => x.Id == command.CardId);
+			dbCard.ColumnId = command.ColumnId;
 			_dbContext.SaveChanges();
 		}
 	}

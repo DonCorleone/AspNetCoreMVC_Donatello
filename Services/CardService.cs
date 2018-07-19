@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Donatello.Infrastructure;
 using Donatello.Models;
+using Donatello.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 

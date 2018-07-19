@@ -1,6 +1,7 @@
 namespace Donatello.ViewModels
 {
-    public class NewBoard{
-       public string Title {get;set;}
-    }
+	public class NewBoard
+	{
+		public string Title { get; set; }
+	}
 }
