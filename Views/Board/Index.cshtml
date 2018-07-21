@@ -40,7 +40,15 @@
         });
     });
 </script>
-
+ <script type="text/javascript">
+    $(function () {
+        $('#BoardColor').spectrum({
+            change: function (color) {
+                document.body.style.background = color.toHexString();
+            }
+        });
+    });
+</script>
 
 <div class="container">
 	<div class="row">
@@ -48,9 +56,22 @@
 	</div>
     @if (Model.Columns.Count > 0)
     {
-        <a asp-action="AddCard" asp-controller="Board" asp-route-id="@Model.Id" class="waves-effect waves-light btn">
-        Add Card
-        </a>
+        <div class="row">
+            <!-- wrap the existing Add Card button in a column -->
+            <div class="col s10">
+                <a asp-controller="Board"
+                asp-action="AddCard"
+                asp-route-id="@Model.Id"
+                class="waves-effect waves-light btn">
+                Add Card
+                </a>
+            </div>
+            <!-- add this column -->
+            <div class="col s2">
+                <input type="hidden" id="BoardId" value="@Model.Id"/> <!-- We'll need this -->
+                <input type="color" id="BoardColor"/> Board Color
+            </div>
+        </div>
     }
 	<div class="row">
         @foreach (var column in Model.Columns)
